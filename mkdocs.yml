@@ -1,1 +1,5 @@
 site_name: Raffya docs
+site_url: https://docs.pyrolab.fr/
+nav:
+  - Home: index.md
+  - Setup: setup.md
