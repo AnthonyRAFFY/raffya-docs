@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://docs.pyrolab.fr/setup/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Setup - Raffya docs</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Raffya docs</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#startup-scripts" class="nav-link">Startup scripts</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#up-to-date-installation" class="nav-link">Up-to-date installation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#zsh" class="nav-link">Zsh</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#color-support-for-mobaxterm" class="nav-link">Color support for MobaXTerm</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#powerlevel10k" class="nav-link">Powerlevel10k</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#k3s-as-a-service" class="nav-link">K3S as a service</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#autocompletion-for-zsh" class="nav-link">Autocompletion for zsh</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#better-grep-and-ls-aliases" class="nav-link">Better grep and ls, aliases</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#kubecolor" class="nav-link">Kubecolor</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#kubectl-zsh-completion" class="nav-link">Kubectl zsh completion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#miniconda" class="nav-link">Miniconda</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="startup-scripts">Startup scripts</h2>
+<p>This documentation contains every steps necessary to setup the basics for my own Ubuntu-server 22.04</p>
+<h2 id="up-to-date-installation">Up-to-date installation</h2>
+<p>First, make sure the installation is fully up-to-date :</p>
+<pre><code>sudo apt-get update
+sudo apt-get upgrade
+</code></pre>
+<h2 id="zsh">Zsh</h2>
+<p>Install Zsh as it will provide better customizations later</p>
+<pre><code>sudo apt-get install zsh
+chsh -s /bin/zsh
+</code></pre>
+<h2 id="color-support-for-mobaxterm">Color support for MobaXTerm</h2>
+<p>(Optional) Color support for MobaXTerm</p>
+<pre><code>echo 'export TERM=xterm-256color' &gt;&gt;~/.zshrc
+</code></pre>
+<h1 id="powerlevel10k">Powerlevel10k</h1>
+<p>Powerlevel10k provides great customizations options for Zsh</p>
+<pre><code>git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' &gt;&gt;~/.zshrc
+</code></pre>
+<p>A powerlevel10k setup wizard should pop up after these commands.</p>
+<h1 id="k3s-as-a-service">K3S as a service</h1>
+<p>Install K3S without Traefik using the official K3S installation script.</p>
+<pre><code>curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable=traefik" sh -
+
+# Import the configuration file needed for kubectl to communicate with the cluster
+mkdir ~/.kube 2&gt; /dev/null
+sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+sudo chown "$USER:$USER" ~/.kube/config
+chmod 600 ~/.kube/config
+echo 'export KUBECONFIG=~/.kube/config' &gt;&gt;~/.zshrc
+</code></pre>
+<p>Make sure this is working by running any kubectl command. Example :</p>
+<pre><code>kubectl get pods --all-namespaces
+</code></pre>
+<h1 id="autocompletion-for-zsh">Autocompletion for zsh</h1>
+<p>Add autocompletion based on your command history</p>
+<pre><code>git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+echo 'source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh' &gt;&gt;~/.zshrc
+</code></pre>
+<h1 id="better-grep-and-ls-aliases">Better grep and ls, aliases</h1>
+<p>Title says it all.</p>
+<pre><code>cat &gt;&gt;~/.zshrc &lt;&lt;EOL
+
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+test -r ~/.dircolors &amp;&amp; eval "\$(dircolors -b ~/.dircolors)" || eval "\$(dircolors -b)"
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+fi
+EOL
+</code></pre>
+<h1 id="kubecolor">Kubecolor</h1>
+<p>Add colors for the kubectl command.</p>
+<pre><code>wget https://github.com/hidetatz/kubecolor/releases/download/v0.0.25/kubecolor_0.0.25_Linux_x86_64.tar.gz
+sudo tar -xzf kubecolor_0.0.25_Linux_x86_64.tar.gz -C /usr/local/bin kubecolor
+sudo chown root:root /usr/local/bin/kubecolor
+sudo chmod 755 /usr/local/bin/kubecolor
+</code></pre>
+<h1 id="kubectl-zsh-completion">Kubectl zsh completion</h1>
+<p>If you installed K3S, this add command completion for kubectl (pods names, namespaces, etc.)</p>
+<p>Remove</p>
+<pre><code>alias kubectl=kubecolor 
+compdef kubecolor=kubectl
+</code></pre>
+<p>from the below code if you decided not to install kubecolor.</p>
+<pre><code>cat &gt;&gt;~/.zshrc &lt;&lt;EOL
+
+
+# Zsh K8S completion
+source &lt;(kubectl completion zsh)
+alias kubectl=kubecolor
+compdef kubecolor=kubectl
+alias k=kubectl
+alias ksvc="kubectl get svc"
+alias kpods="kubectl get pod"
+alias kpv="kubectl get pv"
+alias kpvc="kubectl get pvc"
+EOL
+</code></pre>
+<h1 id="miniconda">Miniconda</h1>
+<p>For python users, install miniconda and its Zsh integration</p>
+<pre><code>mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm -rf ~/miniconda3/miniconda.sh
+~/miniconda3/bin/conda init zsh
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
