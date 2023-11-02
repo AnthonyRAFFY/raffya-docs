@@ -1,0 +1,5 @@
+name: mkdocs-build
+description: Build static pages using mkdocs
+runs:
+  using: docker
+  image: Dockerfile
