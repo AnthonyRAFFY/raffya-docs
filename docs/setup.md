@@ -1,7 +1,6 @@
-## Startup scripts
 This documentation contains every steps necessary to setup the basics for my own Ubuntu-server 22.04
 
-## Up-to-date installation
+# Up-to-date installation
 First, make sure the installation is fully up-to-date :
 
     sudo apt-get update
@@ -9,14 +8,14 @@ First, make sure the installation is fully up-to-date :
 
   
 
-## Zsh
+# Zsh
 Install Zsh as it will provide better customizations later
 
 	sudo apt-get install zsh
 	chsh -s /bin/zsh
   
 
-## Color support for MobaXTerm
+# Color support for MobaXTerm
 (Optional) Color support for MobaXTerm
 
 	echo 'export TERM=xterm-256color' >>~/.zshrc
@@ -107,6 +106,17 @@ from the below code if you decided not to install kubecolor.
 	alias kpvc="kubectl get pvc"
 	EOL
   
+
+# DNS
+On Ubuntu server 22.04, DNS requests are sent to 127.0.0.1:53 and handled by systemd-resolved
+
+To specify your DNS servers, modify 
+	
+	/etc/systemd/resolved.conf 
+
+and restart the service
+
+	systemctl restart systemd-resolved.service
 
 # Miniconda
 For python users, install miniconda and its Zsh integration
