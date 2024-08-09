@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="https://docs.pyrolab.fr/setup/">
+        <link rel="canonical" href="https://docs.pyrolab.fr/pyrolab-apps/">
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Setup - Raffya docs</title>
+        <title>Pyrolab apps - Raffya docs</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -38,7 +38,7 @@
                                 <a href=".." class="nav-link">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a href="./" class="nav-link active" aria-current="page">Setup</a>
+                                <a href="../setup/" class="nav-link">Setup</a>
                             </li>
                         </ul>
 
@@ -48,16 +48,6 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
-                            <li class="nav-item">
-                                <a rel="prev" href=".." class="nav-link">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" class="nav-link disabled">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
                     </ul>
                 </div>
             </div>
@@ -76,57 +66,72 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#up-to-date-installation" class="nav-link">Up-to-date installation</a>
+            <li class="nav-item" data-bs-level="2"><a href="#environment-variables" class="nav-link">Environment variables</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-bs-level="1"><a href="#zsh" class="nav-link">Zsh</a>
+            <li class="nav-item" data-bs-level="2"><a href="#nfs" class="nav-link">NFS</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-bs-level="1"><a href="#color-support-for-mobaxterm" class="nav-link">Color support for MobaXTerm</a>
+            <li class="nav-item" data-bs-level="2"><a href="#acme" class="nav-link">ACME</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-bs-level="1"><a href="#powerlevel10k" class="nav-link">Powerlevel10k</a>
+            <li class="nav-item" data-bs-level="2"><a href="#storage" class="nav-link">Storage</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-bs-level="1"><a href="#k3s-as-a-service" class="nav-link">K3S as a service</a>
+            <li class="nav-item" data-bs-level="2"><a href="#jellyseerr" class="nav-link">Jellyseerr</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-bs-level="1"><a href="#autocompletion-for-zsh" class="nav-link">Autocompletion for zsh</a>
+            <li class="nav-item" data-bs-level="2"><a href="#qbittorrent" class="nav-link">QBittorrent</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-bs-level="1"><a href="#better-grep-and-ls-aliases" class="nav-link">Better grep and ls, aliases</a>
+            <li class="nav-item" data-bs-level="2"><a href="#radarr" class="nav-link">Radarr</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-bs-level="1"><a href="#kubecolor" class="nav-link">Kubecolor</a>
+            <li class="nav-item" data-bs-level="2"><a href="#sonarr" class="nav-link">Sonarr</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-bs-level="1"><a href="#kubectl-zsh-completion" class="nav-link">Kubectl zsh completion</a>
+            <li class="nav-item" data-bs-level="2"><a href="#prowlarr" class="nav-link">Prowlarr</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-bs-level="1"><a href="#dns" class="nav-link">DNS</a>
+            <li class="nav-item" data-bs-level="2"><a href="#jellyfin" class="nav-link">Jellyfin</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-bs-level="1"><a href="#miniconda" class="nav-link">Miniconda</a>
+            <li class="nav-item" data-bs-level="2"><a href="#flaresolverr" class="nav-link">Flaresolverr</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="2"><a href="#dashboard" class="nav-link">Dashboard</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#joal" class="nav-link">Joal</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#twitchminer" class="nav-link">Twitchminer</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -135,104 +140,74 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<p>This documentation contains every steps necessary to setup the basics for my own Ubuntu-server 22.04</p>
-<h1 id="up-to-date-installation">Up-to-date installation</h1>
-<p>First, make sure the installation is fully up-to-date :</p>
-<pre><code>sudo apt-get update
-sudo apt-get upgrade
+<h2 id="environment-variables">Environment variables</h2>
+<pre><code>export LB_IP="your_ip" # Example : "192.168.1.27"
+export NFS_IP="x.x.x.x" # Example: "192.168.1.21"
+export CONFIG_PATH="your_config_nfs_path" # Example : "/nfs-data"
+export DATA_PATH="your_data_nfs_path" # Example : "/nfs-data"
+export CONFIG_SC="nfs-ssd"
+export DATA_SC="nfs-hdd"
 </code></pre>
-<h1 id="zsh">Zsh</h1>
-<p>Install Zsh as it will provide better customizations later</p>
-<pre><code>sudo apt-get install zsh
-chsh -s /bin/zsh
-</code></pre>
-<h1 id="color-support-for-mobaxterm">Color support for MobaXTerm</h1>
-<p>(Optional) Color support for MobaXTerm</p>
-<pre><code>echo 'export TERM=xterm-256color' &gt;&gt;~/.zshrc
-</code></pre>
-<h1 id="powerlevel10k">Powerlevel10k</h1>
-<p>Powerlevel10k provides great customizations options for Zsh</p>
-<pre><code>git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' &gt;&gt;~/.zshrc
-</code></pre>
-<p>A powerlevel10k setup wizard should pop up after these commands.</p>
-<h1 id="k3s-as-a-service">K3S as a service</h1>
-<p>Install K3S without Traefik using the official K3S installation script.</p>
-<pre><code>curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable=traefik" sh -
+<h2 id="nfs">NFS</h2>
+<p>Install both config and data nfs provisioner:</p>
+<pre><code>helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
+helm install nfs-hdd nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
+--set nfs.server="${NFS_IP}" \
+--set nfs.path="${DATA_PATH}" \
+--set storageClass.name="${DATA_SC}"
 
-# Import the configuration file needed for kubectl to communicate with the cluster
-mkdir ~/.kube 2&gt; /dev/null
-sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
-sudo chown "$USER:$USER" ~/.kube/config
-chmod 600 ~/.kube/config
-echo 'export KUBECONFIG=~/.kube/config' &gt;&gt;~/.zshrc
+helm install nfs-ssd nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
+--set nfs.server="${NFS_IP}" \
+--set nfs.path="${CONFIG_PATH}" \
+--set storageClass.name="${CONFIG_SC}"
 </code></pre>
-<p>Make sure this is working by running any kubectl command. Example :</p>
-<pre><code>kubectl get pods --all-namespaces
+<h2 id="acme">ACME</h2>
+<p>Install the ArgoCD application:</p>
+<pre><code>argocd app create acme --repo git@github.com:AnthonyRAFFY/homelab2.git --path acme --dest-namespace cert-manager --dest-server https://kubernetes.default.svc --directory-recurse
 </code></pre>
-<h1 id="autocompletion-for-zsh">Autocompletion for zsh</h1>
-<p>Add autocompletion based on your command history</p>
-<pre><code>git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-echo 'source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh' &gt;&gt;~/.zshrc
+<h2 id="storage">Storage</h2>
+<p>Install the ArgoCD application:</p>
+<pre><code>argocd app create pvc --repo git@github.com:AnthonyRAFFY/homelab2.git --path pvc --dest-namespace media --dest-server https://kubernetes.default.svc
 </code></pre>
-<h1 id="better-grep-and-ls-aliases">Better grep and ls, aliases</h1>
-<p>Title says it all.</p>
-<pre><code>cat &gt;&gt;~/.zshrc &lt;&lt;EOL
-
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-test -r ~/.dircolors &amp;&amp; eval "\$(dircolors -b ~/.dircolors)" || eval "\$(dircolors -b)"
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-fi
-EOL
+<h2 id="jellyseerr">Jellyseerr</h2>
+<p>Install the ArgoCD application:</p>
+<pre><code>argocd app create jellyseerr --repo git@github.com:AnthonyRAFFY/homelab2.git --path jellyseerr --dest-namespace media --dest-server https://kubernetes.default.svc --helm-set lb_ip="${LB_IP}" --helm-set storageClass="${CONFIG_SC}"
 </code></pre>
-<h1 id="kubecolor">Kubecolor</h1>
-<p>Add colors for the kubectl command.</p>
-<pre><code>wget https://github.com/hidetatz/kubecolor/releases/download/v0.0.25/kubecolor_0.0.25_Linux_x86_64.tar.gz
-sudo tar -xzf kubecolor_0.0.25_Linux_x86_64.tar.gz -C /usr/local/bin kubecolor
-sudo chown root:root /usr/local/bin/kubecolor
-sudo chmod 755 /usr/local/bin/kubecolor
+<h2 id="qbittorrent">QBittorrent</h2>
+<p>Install the ArgoCD application:</p>
+<pre><code>argocd app create qbittorrent --repo git@github.com:AnthonyRAFFY/homelab2.git --path qbittorrent --dest-namespace media --dest-server https://kubernetes.default.svc --helm-set lb_ip="${LB_IP}" --helm-set storageClass="${CONFIG_SC}" --helm-set wg_private_key="private_key_from_conf" --helm-set wg_addresses="adresses_from_conf" --helm-set wg_server_name="se-mma-wg-004" --helm-set wg_port="51815"
 </code></pre>
-<h1 id="kubectl-zsh-completion">Kubectl zsh completion</h1>
-<p>If you installed K3S, this add command completion for kubectl (pods names, namespaces, etc.)</p>
-<p>Remove</p>
-<pre><code>alias kubectl=kubecolor 
-compdef kubecolor=kubectl
+<h2 id="radarr">Radarr</h2>
+<p>Install the ArgoCD application:</p>
+<pre><code>argocd app create radarr --repo git@github.com:AnthonyRAFFY/homelab2.git --path radarr --dest-namespace media --dest-server https://kubernetes.default.svc --helm-set lb_ip="${LB_IP}" --helm-set storageClass="${CONFIG_SC}"
 </code></pre>
-<p>from the below code if you decided not to install kubecolor.</p>
-<pre><code>cat &gt;&gt;~/.zshrc &lt;&lt;EOL
-
-
-# Zsh K8S completion
-source &lt;(kubectl completion zsh)
-alias kubectl=kubecolor
-compdef kubecolor=kubectl
-alias k=kubectl
-alias ksvc="kubectl get svc"
-alias kpods="kubectl get pod"
-alias kpv="kubectl get pv"
-alias kpvc="kubectl get pvc"
-EOL
+<h2 id="sonarr">Sonarr</h2>
+<p>Install the ArgoCD application:</p>
+<pre><code>argocd app create sonarr --repo git@github.com:AnthonyRAFFY/homelab2.git --path sonarr --dest-namespace media --dest-server https://kubernetes.default.svc --helm-set lb_ip="${LB_IP}" --helm-set storageClass="${CONFIG_SC}"
 </code></pre>
-<h1 id="dns">DNS</h1>
-<p>On Ubuntu server 22.04, DNS requests are sent to 127.0.0.1:53 and handled by systemd-resolved</p>
-<p>To specify your DNS servers, modify </p>
-<pre><code>/etc/systemd/resolved.conf
+<h2 id="prowlarr">Prowlarr</h2>
+<p>Install the ArgoCD application:</p>
+<pre><code>argocd app create prowlarr --repo git@github.com:AnthonyRAFFY/homelab2.git --path prowlarr --dest-namespace media --dest-server https://kubernetes.default.svc --helm-set lb_ip="${LB_IP}" --helm-set storageClass="${CONFIG_SC}"
 </code></pre>
-<p>and restart the service</p>
-<pre><code>systemctl restart systemd-resolved.service
+<h2 id="jellyfin">Jellyfin</h2>
+<p>Install the ArgoCD application:</p>
+<pre><code>argocd app create jellyfin --repo git@github.com:AnthonyRAFFY/homelab2.git --path jellyfin --dest-namespace media --dest-server https://kubernetes.default.svc --helm-set lb_ip="${LB_IP}" --helm-set storageClass="${CONFIG_SC}"
 </code></pre>
-<h1 id="miniconda">Miniconda</h1>
-<p>For python users, install miniconda and its Zsh integration</p>
-<pre><code>mkdir -p ~/miniconda3
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
-bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
-rm -rf ~/miniconda3/miniconda.sh
-~/miniconda3/bin/conda init zsh
+<h2 id="flaresolverr">Flaresolverr</h2>
+<p>Install the ArgoCD application:</p>
+<pre><code>argocd app create flaresolverr --repo git@github.com:AnthonyRAFFY/homelab2.git --path flaresolverr --dest-namespace media --dest-server https://kubernetes.default.svc
+</code></pre>
+<h2 id="dashboard">Dashboard</h2>
+<p>Install the ArgoCD application:</p>
+<pre><code>argocd app create dashboard --repo git@github.com:AnthonyRAFFY/homelab2.git --path dashboard --dest-namespace media --dest-server https://kubernetes.default.svc --helm-set lb_ip="${LB_IP}" --helm-set storageClass="${CONFIG_SC}"
+</code></pre>
+<h1 id="joal">Joal</h1>
+<p>Install the ArgoCD application:</p>
+<pre><code>argocd app create joal --repo git@github.com:AnthonyRAFFY/homelab2.git --path joal --dest-namespace media --dest-server https://kubernetes.default.svc --helm-set lb_ip="${LB_IP}" --helm-set storageClass="${CONFIG_SC}" --helm-set wg_private_key="private_key_from_conf" --helm-set wg_addresses="adresses_from_conf" --helm-set wg_server_name="se-mma-wg-004" --helm-set wg_port="51815" --helm-set joal_prefix="your_joal_prefix" --helm-set joal_secret_token="your_joal_secret_token"
+</code></pre>
+<h1 id="twitchminer">Twitchminer</h1>
+<p>Install the ArgoCD application:</p>
+<pre><code>argocd app create twitchminer --repo git@github.com:AnthonyRAFFY/homelab2.git --path twitchminer --dest-namespace media --dest-server https://kubernetes.default.svc --helm-set lb_ip="${LB_IP}" --helm-set storageClass="${CONFIG_SC}"
 </code></pre></div>
             </div>
         </div>
