@@ -1,5 +1,8 @@
 site_name: Raffya docs
 site_url: https://docs.pyrolab.fr/
+dev_addr: 192.168.1.27:8000
 nav:
   - Home: index.md
   - Setup: setup.md
+  - Kube setup: pyrolab.md
+  - Kube apps: pyrolab-apps.md

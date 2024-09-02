@@ -80,3 +80,10 @@ Install the ArgoCD application:
 Install the ArgoCD application:
 
     argocd app create twitchminer --repo git@github.com:AnthonyRAFFY/homelab2.git --path twitchminer --dest-namespace media --dest-server https://kubernetes.default.svc --helm-set lb_ip="${LB_IP}" --helm-set storageClass="${CONFIG_SC}"
+
+# Scrappey Proxy
+Install the ArgoCD application:
+
+    argocd app create scrappey --repo git@github.com:AnthonyRAFFY/homelab2.git --path scrappey --dest-namespace media --dest-server https://kubernetes.default.svc --helm-set proxy_username="username" --helm-set proxy_password="password" --helm-set scrappey_api_key="scrappey_api_key"
+
+Do not forget to edit the htpasswd file included in the chart to match the username and password you provided
