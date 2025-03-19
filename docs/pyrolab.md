@@ -49,6 +49,14 @@ Traefik is already installed by default with K3S
           - Pyrolab inc.
         organizationalUnits:
           - Pyrolab
+    ---
+    apiVersion: cert-manager.io/v1
+    kind: ClusterIssuer
+    metadata:
+      name: pyrolab-issuer
+    spec:
+      ca:
+        secretName: pyrolab-selfsigned-tls
 Export the base64 encoded ca.crt from "pyrolab-selfsigned-cert", decode it and import it in your OS.
 # ArgoCD
 #### Installation
@@ -89,31 +97,31 @@ then run the command
     kubectl edit configmaps -n argocd argocd-cmd-params-cm
 
 #### Ingress route creation
-
     apiVersion: traefik.containo.us/v1alpha1
     kind: IngressRoute
     metadata:
-    name: argocd-server
-    namespace: argocd
+      name: argocd-server
+      namespace: argocd
     spec:
-    entryPoints:
+      entryPoints:
         - websecure
-    routes:
+      routes:
         - kind: Rule
-        match: Host(`argocd.192.168.1.27.nip.io`)
-        priority: 10
-        services:
+          match: Host(`argocd.192.168.1.27.nip.io`)
+          priority: 10
+          services:
             - name: argocd-server
-            port: 80
+              port: 80
         - kind: Rule
-        match: Host(`argocd.192.168.1.27.nip.io`) && Headers(`Content-Type`, `application/grpc`)
-        priority: 11
-        services:
+          match: Host(`argocd.192.168.1.27.nip.io`) && Headers(`Content-Type`, `application/grpc`)
+          priority: 11
+          services:
             - name: argocd-server
-            port: 80
-            scheme: h2c
-    tls:
-        certResolver: default
+              port: 80
+              scheme: h2c
+      tls:
+        secretName: argocd-tls
+
 #### Login
 Connect to the UI dashboard and change the default admin password, then connect the argocd CLI
 
