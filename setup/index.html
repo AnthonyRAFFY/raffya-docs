@@ -232,6 +232,18 @@ EOL
 <p>and restart the service</p>
 <pre><code>systemctl restart systemd-resolved.service
 </code></pre>
+<p>If you need to free up the port 53 (Custom DNS server for example), you need to disable the stub</p>
+<pre><code>DNSStubListener=no
+</code></pre>
+<p>On older version of linux, you need to manually update the symlink</p>
+<pre><code>/etc/resolv.conf
+</code></pre>
+<p>to</p>
+<pre><code>/run/systemd/resolve/resolv.conf
+</code></pre>
+<p>as it keeps the symlink to </p>
+<pre><code>/run/systemd/resolve/stub-resolv.conf
+</code></pre>
 <h1 id="miniconda">Miniconda</h1>
 <p>For python users, install miniconda and its Zsh integration</p>
 <pre><code>mkdir -p ~/miniconda3
