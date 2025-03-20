@@ -122,6 +122,11 @@ If you need to free up the port 53 (Custom DNS server for example), you need to 
 
 	DNSStubListener=no
 
+Create a file /etc/systemd/resolved.conf.d/no-stub.conf with the following contents:
+
+	[Resolve]
+	DNSStubListener=no
+
 On older version of linux, you need to manually update the symlink
 	
 	/etc/resolv.conf
