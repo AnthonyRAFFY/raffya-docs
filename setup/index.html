@@ -235,6 +235,10 @@ EOL
 <p>If you need to free up the port 53 (Custom DNS server for example), you need to disable the stub</p>
 <pre><code>DNSStubListener=no
 </code></pre>
+<p>Create a file /etc/systemd/resolved.conf.d/no-stub.conf with the following contents:</p>
+<pre><code>[Resolve]
+DNSStubListener=no
+</code></pre>
 <p>On older version of linux, you need to manually update the symlink</p>
 <pre><code>/etc/resolv.conf
 </code></pre>
